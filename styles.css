@@ -1,0 +1,58 @@
+
+/* additional normalizing */
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #2F911E;
+    font-family: Arial;
+}
+#container {
+    margin: 25px;
+    padding: 40px 25px;
+    background-color: white;
+}
+
+#logo {
+    width: 300px;
+    height: 100px;
+    border: solid black 3px;
+}
+
+h1 {
+    font-family: 'Kaushan Script', cursive;
+    font-weight: 400;
+    font-size: 60px;
+}
+
+nav {
+    background-color: #47C15C; 
+}
+nav ul {
+    display: flex;
+    justify-content: space-between;
+}
+nav ul li {
+    flex: 1;
+    border-right: solid white 3px;
+}
+
+nav ul li:last-of-type  {
+    border-right: none;
+}
+nav ul li a {
+    display: block;
+    text-align: center;
+}
+

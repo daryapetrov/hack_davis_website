@@ -4,52 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <title>InSeason</title>
 </head>
 <body>
 
+    <div id="container">
 
-    <header>
-        <div id="logo"></div>
-        <h1>InSeason</h1>
-        <h2>sustainable shopping made easy</h2>
-    </header>
+        <header>
+            <div id="logo"></div>
+            <h1>InSeason</h1>
+            <h2>sustainable shopping made easy</h2>
+        </header>
 
-    <main id="app">
+        <nav>
+            <ul>
+                <li><a href="">About</a></li>
+                <li><a href="">Learn More</a></li>
+            </ul>
+        </nav>
 
-        <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
-        <button @click="addItem(inputText)">Add</button>
+        <aside>
+            <h3>How to use:</h3>
+            <div></div>
+        </aside>
 
-        <ul>
-            <li v-for="item in groceryList">
-                {{ item.name }}
-                <button @click="deleteItem(item)">remove</button>
-            </li>
-        </ul>
+        <main id="app">
 
+            <!-- getting input -->
+            <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
+            <button @click="addItem(inputText)">Add</button>
 
-        
-    </main>
+            <!-- list of groceries -->
+            <ul>
+                <li v-for="item in groceryList">
+                    <span>{{ item.name }}</span>
+                    <button @click="deleteItem(item)">remove</button>
+                </li>
+            </ul>
+
+        </main>
+
+        <footer>
+            <p>Doubt our coding abilities? Then validate our HTML <a href="https://validator.w3.org/check?uri=referer"> here</a> and our CSS <a href="https://jigsaw.w3.org/css-validator/check?uri=referer">here</a></p>
+        </footer>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
         
+        // refers to <main>
         const app = new Vue ({
             el: "#app",
 
             data: {
                 inputText: "",
                 groceryList: [
-                    { name: "apples"}
+                   
                 ],
             },
 
             methods: {
+                // adds item to groceryList
                 addItem(item) {
                     this.groceryList.push( { name: item } )
                     this.inputText = ""
                 },
+                // removes item from groceryList
                 deleteItem(item) {
                     this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
                 },
