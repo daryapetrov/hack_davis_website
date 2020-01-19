@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>InSeason</title>
+</head>
+<body>
+
+
+    <header>
+        <div id="logo"></div>
+        <h1>InSeason</h1>
+        <h2>sustainable shopping made easy</h2>
+    </header>
+
+    <main id="app">
+
+        <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
+        <button @click="addItem(inputText)">Add</button>
+
+        <ul>
+            <li v-for="item in groceryList">
+                {{ item.name }}
+                <button @click="deleteItem(item)">remove</button>
+            </li>
+        </ul>
+
+
+        
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        
+        const app = new Vue ({
+            el: "#app",
+
+            data: {
+                inputText: "",
+                groceryList: [
+                    { name: "apples"}
+                ],
+            },
+
+            methods: {
+                addItem(item) {
+                    this.groceryList.push( { name: item } )
+                    this.inputText = ""
+                },
+                deleteItem(item) {
+                    this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
+                },
+            }
+
+
+            
+        })
+    
+    
+    </script>
+
+
+    
+</body>
+</html>
