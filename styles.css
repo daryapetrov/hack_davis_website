@@ -24,10 +24,16 @@ body {
     background-color: white;
 }
 
-#logo {
-    width: 300px;
-    height: 100px;
-    border: solid black 3px;
+header {
+    display:flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+#logo img {
+    max-width: 150px;
+}
+header h2 {
+    flex: 100%;
 }
 
 h1 {
@@ -67,16 +73,19 @@ main h3 {
     margin-top: 0px;
     margin-bottom: 20px;
 }
+main ul {
+    margin-bottom: 20px;
+}
 main ul li {
     padding: 5px;
     display: flex;
     justify-content: space-between;
 }
 
-aside {
-    margin-bottom: 20px;
-}
 
+#red {
+    color: red;
+}
 
 
 footer {
