@@ -87,22 +87,15 @@ button {
     padding: 3px;
     background-color: #E1F4D2;
 }
+
 #red {
     color: red;
 }
-.warning {
-    width: 15px;
-}
-
 
 footer {
     margin-top: 100px;
 }
 
+@media only screen and (min-width: 700px) {
 
-.yes {
-    display: initial;
-}
-.no {
-    display: none;
 }

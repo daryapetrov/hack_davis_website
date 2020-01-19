@@ -27,14 +27,9 @@
                 // adds item to groceryList
                 addItem(item) {
                     item = item.toLowerCase().trim(); // make case insensitive
-                    this.groceryList.push( { name: item } )
-                    this.inputText = ""
-                    // FIX WEIRDNESS
-                    this.outOfSeasonList = getOutOfSeason(this.groceryList);
-                    //if (this.isShown == true) {
-                        
-                        //this.toggleIsShown();
-                    //}
+                    this.groceryList.push( { name: item } ) // add to groceryList
+                    this.inputText = "" // clear input box
+                    this.outOfSeasonList = getOutOfSeason(this.groceryList); // update
                 },
                 // removes item from groceryList
                 deleteItem(item) {
