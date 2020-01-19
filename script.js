@@ -3,47 +3,36 @@
         var month = dateArray[1];
         console.log(month);
 
-        var fall = ['apples'];
-        var spring = ['flowers'];
-        var summer = ['cherries'];
-        var winter = ["winter fruit", "a", "b"];
-
         var currSeason = getSeason(month);
         var outOfSeasonList = [];
-        //var groceryList = [];
         
         // refers to <main>
         const app = new Vue ({
             el: "#app",
 
             data: {
-                //isShown: false,
                 inputText: "",
                 groceryList: [],
-                //outOfSeasonList: [],
             },
 
             methods: {
                 // adds item to groceryList
                 addItem(item) {
                     item = item.toLowerCase().trim(); // make case insensitive
-                    this.groceryList.push( { name: item } )
-                    this.inputText = ""
-                    // FIX WEIRDNESS
-                    this.outOfSeasonList = getOutOfSeason(this.groceryList);
-                    //if (this.isShown == true) {
-                        
-                        //this.toggleIsShown();
-                    //}
+                    if (membershipCheck(item) == true) {
+                        this.groceryList.push( { name: item } ) // add to groceryList
+                        this.outOfSeasonList = getOutOfSeason(this.groceryList); // update
+                    }
+                    else {
+                        alert("Unfortunately, this item is not in our database. Make sure your item is plural.");
+                    }
+                    this.inputText = "" // clear input box
+                    
                 },
                 // removes item from groceryList
                 deleteItem(item) {
                     this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
                 },
-                // toggleIsShown() {
-                //     this.isShown = true
-                //     this.outOfSeasonList = getOutOfSeason(this.groceryList);
-                // },
                 isOutOfSeason(item) {
                     if (this.outOfSeasonList.findIndex( i => i.name === item.name ) != -1) {
                         return "red";
@@ -61,7 +50,7 @@
         })
 
 
-        function getSeason() {
+        function getSeason(month) {
 
             if (month == "Jan" || month == "Feb" || month == "Dec") {
                 return "winter"
@@ -136,3 +125,12 @@
             return outOfSeasonList;            
             
         }
+
+        // checks if we have the item in our records
+        function membershipCheck(item) {
+            return ((spring.indexOf(item) != -1)
+            || (summer.indexOf(item) != -1)
+            || (fall.indexOf(item) != -1)
+            || (winter.indexOf(item) != -1));
+        }
+
