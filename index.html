@@ -43,7 +43,6 @@
             <!-- display items -->
             <ul>
                 <li v-for="item in groceryList">
-                    <!-- id="red" for out of season items -->
                     <span v-bind:id="isOutOfSeason(item)">{{ item.name }}</span>
                     <button @click="deleteItem(item)">remove</button>
                 </li>
