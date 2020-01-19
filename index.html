@@ -10,12 +10,13 @@
     
     <title>InSeason</title>
 </head>
+
 <body>
 
     <div id="container">
 
         <header>
-            <div id="logo"><img src="./11869132384_66dd61a770_b.jpg"></div>
+            <div id="logo"><img src="./11869132384_66dd61a770_b.jpg" alt="tree logo"></div>
             <h1>InSeason</h1>
             <h2>sustainable shopping made easy</h2>
         </header>
@@ -29,31 +30,23 @@
 
         <main id="app">
 
-            <h3>Your Grocery List</h3>
-            <button @click="toggleIsShown()">Enter</button>
-            
-            
+            <h3>Your Grocery List:</h3>
+
             <!-- getting input -->
+            <p>Enter your grocery item individually below</p>
+            <p>If an item is out of season, it will be displayed in red.</p>
+            
             <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
             <button @click="addItem(inputText)">Add</button>
 
-            <!-- list of groceries -->
+            <!-- display items -->
             <ul>
                 <li v-for="item in groceryList">
-                    <span>{{ item.name }}</span>
+                    <!-- id="red" for out of season items -->
+                    <span v-bind:id="isOutOfSeason(item)">{{ item.name }}</span>
                     <button @click="deleteItem(item)">remove</button>
                 </li>
             </ul>
-
-            <!-- updated stuff -->
-            <template v-if="isShown">
-                <h3>out of season:</h3>
-                <ul>
-                    <li id="red" v-for="item in outOfSeasonList">
-                        <span>{{ item.name }}</span>
-                    </li>
-                </ul>
-            </template>
 
 
         </main>
@@ -65,139 +58,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-    <script>
-
-        var currentDate = Date();
-        var dateArray = currentDate.split(" ");
-        var month = dateArray[1];
-        console.log(month);
-
-        var fall = ['apples'];
-        var spring = ['flowers'];
-        var summer = ['cherries'];
-        var winter = ["winter-fruit"];
-
-        var currSeason = getSeason(month);
-        var outOfSeasonList = [];
-        var groceryList = [];
-        
-        // refers to <main>
-        const app = new Vue ({
-            el: "#app",
-
-            data: {
-                message: "this is the message",
-                seen: true,
-                outSeason: false,
-                isShown: false,
-                inputText: "",
-                groceryList: [],
-                outOfSeasonList: [],
-                
-
-            },
-
-            methods: {
-                // adds item to groceryList
-                addItem(item) {
-                    this.groceryList.push( { name: item } )
-                    this.inputText = ""
-                },
-                // removes item from groceryList
-                deleteItem(item) {
-                    this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
-                },
-                toggleIsShown() {
-                    this.isShown = true
-                    this.outOfSeasonList = getOutOfSeason(this.groceryList);
-                },
-             }
-            
-        })
-
-
-        function getSeason() {
-
-            if (month == "Jan" || month == "Feb" || month == "Dec") {
-                return "winter"
-            }
-            else if (month == "Mar" || month == "Apr" || month == "May") {
-                return "spring"
-            }
-            else if (month == "Jun" || month == "Jul" || month == "Aug") {
-                return "summer"
-            }
-            else if (month == "Sep" || month == "Oct" || month == "Nov") {
-                return "fall"
-            }
-        }
-
-
-        function getOutOfSeason(groceryList) {
-
-            if (currSeason == "fall") {
-                for (var i = 0; i < groceryList.length; i++) {
-                    var inSeason = false;
-                    for (var j = 0; j < fall.length; j++) {
-                        if (groceryList[i].name == fall[j]) {
-                            inSeason = true; 
-                        }
-                    }
-                    if (!inSeason) {
-                        outOfSeasonList.push(groceryList[i]);
-                    }
-                }
-            }
-            else if (currSeason == "winter") {
-                for (var i = 0; i < groceryList.length; i++) {
-                    var inSeason = false;
-                    for (var j = 0; j < winter.length; j++) {
-                        if (groceryList[i].name == winter[j]) {
-                            inSeason = true; 
-                        }
-                    }
-                    if (!(inSeason)) {
-                        outOfSeasonList.push(groceryList[i]);
-                    }
-                }
-            }
-            else if (currSeason == "summer") {
-                for (var i = 0; i < groceryList.length; i++) {
-                    var inSeason = false;
-                    for (var j = 0; j < summer.length; j++) {
-                        if (groceryList[i].name == summer[j]) {
-                            inSeason = true; 
-                        }
-                    }
-                    if (!inSeason) {
-                        outOfSeasonList.push(groceryList[i]);
-                    }
-                }
-            }
-            else if (currSeason == "spring") {
-                for (var i = 0; i < groceryList.length; i++) {
-                    var inSeason = false;
-                    for (var j = 0; j < spring.length; j++) {
-                        if (groceryList[i].name == spring[j]) {
-                            inSeason = true; 
-                        }
-                    }
-                    if (!inSeason) {
-                        outOfSeasonList.push(groceryList[i]);
-                    }
-                }
-            }
-
-            return outOfSeasonList;            
-            
-        }
-
-
-
-
-    
-    </script>
+    <script src="script.js"></script>
 
 
     
