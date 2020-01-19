@@ -1,4 +1,4 @@
-var currentDate = Date();
+        var currentDate = Date();
         var dateArray = currentDate.split(" ");
         var month = dateArray[1];
         console.log(month);
@@ -6,7 +6,7 @@ var currentDate = Date();
         var fall = ['apples'];
         var spring = ['flowers'];
         var summer = ['cherries'];
-        var winter = ["winter-fruit", "a", "b"];
+        var winter = ["winter fruit", "a", "b"];
 
         var currSeason = getSeason(month);
         var outOfSeasonList = [];
@@ -17,9 +17,6 @@ var currentDate = Date();
             el: "#app",
 
             data: {
-                message: "this is the message",
-                seen: true,
-                outSeason: false,
                 //isShown: false,
                 inputText: "",
                 groceryList: [],
@@ -43,10 +40,10 @@ var currentDate = Date();
                 deleteItem(item) {
                     this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
                 },
-                toggleIsShown() {
-                    this.isShown = true
-                    this.outOfSeasonList = getOutOfSeason(this.groceryList);
-                },
+                // toggleIsShown() {
+                //     this.isShown = true
+                //     this.outOfSeasonList = getOutOfSeason(this.groceryList);
+                // },
                 isOutOfSeason(item) {
                     if (this.outOfSeasonList.findIndex( i => i.name === item.name ) != -1) {
                         return "red";
@@ -55,6 +52,10 @@ var currentDate = Date();
                         return "none";
                     }
                 },
+                clearLists() {
+                    this.groceryList = [];
+                    this.outOfSeasonList = [];
+                }
              }
             
         })

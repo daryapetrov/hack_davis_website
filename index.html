@@ -35,9 +35,10 @@
             <!-- getting input -->
             <p>Enter your grocery item individually below</p>
             <p>If an item is out of season, it will be displayed in red.</p>
-            
+
             <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
             <button @click="addItem(inputText)">Add</button>
+            <button @click="clearLists()">Clear</button>
 
             <!-- display items -->
             <ul>
