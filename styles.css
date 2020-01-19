@@ -80,16 +80,23 @@ main ul li {
     padding: 5px;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #2F911E;
 }
 
-
+button {
+    padding: 3px;
+    background-color: #E1F4D2;
+}
 #red {
     color: red;
+}
+.warning {
+    width: 15px;
 }
 
 
 footer {
-    margin-top: 40px;
+    margin-top: 100px;
 }
 
 
