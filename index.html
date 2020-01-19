@@ -16,8 +16,8 @@
     <div id="container">
 
         <header>
-            <div id="logo"><img src="./11869132384_66dd61a770_b.jpg" alt="tree logo"></div>
             <h1>InSeason</h1>
+            <div id="logo"><img src="logo (2).png" alt="food logo"></div>
             <h2>sustainable shopping made easy</h2>
         </header>
 
@@ -32,10 +32,12 @@
 
             <h3>Your Grocery List:</h3>
 
-            <!-- getting input -->
-            <p>Enter your grocery item individually below</p>
-            <p>If an item is out of season, it will be displayed in red.</p>
+            <div>
+                <p>Enter your grocery item individually below.</p>
+                <p>If an item is out of season, it will be displayed in red!</p>
+            </div>
 
+            <!-- getting input -->
             <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
             <button @click="addItem(inputText)">Add</button>
             <button @click="clearLists()">Clear</button>
@@ -52,7 +54,8 @@
         </main>
 
         <footer>
-            <p>Doubt our coding abilities? Then validate our HTML <a href="https://validator.w3.org/check?uri=referer"> here</a> and our CSS <a href="https://jigsaw.w3.org/css-validator/check?uri=referer">here</a></p>
+            <p>Information from <a href="https://snaped.fns.usda.gov/seasonal-produce-guide">https://snaped.fns.usda.gov/seasonal-produce-guide</a></p>
+            <p>created by: Alana Rufer, Darya Petrov, Sahana Deo, Allie Y</p>
         </footer>
 
     </div>
