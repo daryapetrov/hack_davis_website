@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
     <title>InSeason</title>
 </head>
 <body>
 
     <div id="container">
+
+        <button @click="getPosts()">TEST</button>
+       
 
         <header>
             <div id="logo"></div>
@@ -26,13 +30,15 @@
             </ul>
         </nav>
 
-        <aside>
-            <h3>How to use:</h3>
-            <div></div>
-        </aside>
 
         <main id="app">
+            <span v-bind:title="message">TITLE MESSAGE</span>
+            <span v-if="seen">SEEN</span>
 
+            <h3>Your Grocery List</h3>
+            <button>Enter</button>
+            
+            
             <!-- getting input -->
             <input type="text" v-model="inputText" @keyup.enter="addItem(inputText)">
             <button @click="addItem(inputText)">Add</button>
@@ -45,6 +51,11 @@
                 </li>
             </ul>
 
+            <!-- updated stuff -->
+            
+
+
+
         </main>
 
         <footer>
@@ -56,16 +67,26 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script>
+
+        var seasonalFruits = [];
+        var fall = ['apples'];
+        var spring = ['flowers'];
+        var summer = ['cherries'];
+        var winter = ["winter-fruit"];
         
         // refers to <main>
         const app = new Vue ({
             el: "#app",
 
             data: {
+                message: "this is the message",
+                seen: true,
+                outSeason: false,
                 inputText: "",
                 groceryList: [
                    
                 ],
+
             },
 
             methods: {
@@ -77,13 +98,18 @@
                 // removes item from groceryList
                 deleteItem(item) {
                     this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
-                },
+                }
+                
+                
             }
-
-
             
         })
-    
+
+        Vue.component('updated-list', {
+            data: {
+                inSeason:
+            }
+        })
     
     </script>
 
