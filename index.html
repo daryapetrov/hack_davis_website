@@ -14,29 +14,23 @@
 
     <div id="container">
 
-        <button @click="getPosts()">TEST</button>
-       
-
         <header>
-            <div id="logo"></div>
+            <div id="logo"><img src="./11869132384_66dd61a770_b.jpg"></div>
             <h1>InSeason</h1>
             <h2>sustainable shopping made easy</h2>
         </header>
 
         <nav>
             <ul>
-                <li><a href="">About</a></li>
-                <li><a href="">Learn More</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
 
 
         <main id="app">
-            <span v-bind:title="message">TITLE MESSAGE</span>
-            <span v-if="seen">SEEN</span>
 
             <h3>Your Grocery List</h3>
-            <button>Enter</button>
+            <button @click="toggleIsShown()">Enter</button>
             
             
             <!-- getting input -->
@@ -52,8 +46,14 @@
             </ul>
 
             <!-- updated stuff -->
-            
-
+            <template v-if="isShown">
+                <h3>out of season:</h3>
+                <ul>
+                    <li id="red" v-for="item in outOfSeasonList">
+                        <span>{{ item.name }}</span>
+                    </li>
+                </ul>
+            </template>
 
 
         </main>
@@ -68,11 +68,19 @@
 
     <script>
 
-        var seasonalFruits = [];
+        var currentDate = Date();
+        var dateArray = currentDate.split(" ");
+        var month = dateArray[1];
+        console.log(month);
+
         var fall = ['apples'];
         var spring = ['flowers'];
         var summer = ['cherries'];
         var winter = ["winter-fruit"];
+
+        var currSeason = getSeason(month);
+        var outOfSeasonList = [];
+        var groceryList = [];
         
         // refers to <main>
         const app = new Vue ({
@@ -82,10 +90,11 @@
                 message: "this is the message",
                 seen: true,
                 outSeason: false,
+                isShown: false,
                 inputText: "",
-                groceryList: [
-                   
-                ],
+                groceryList: [],
+                outOfSeasonList: [],
+                
 
             },
 
@@ -98,15 +107,92 @@
                 // removes item from groceryList
                 deleteItem(item) {
                     this.groceryList.splice(this.groceryList.findIndex( i => i.name === item.name ), 1)
-                }
-                
-            }
+                },
+                toggleIsShown() {
+                    this.isShown = true
+                    this.outOfSeasonList = getOutOfSeason(this.groceryList);
+                },
+             }
             
         })
 
 
-        var currentDate = Date();
-        console.log(currentDate);
+        function getSeason() {
+
+            if (month == "Jan" || month == "Feb" || month == "Dec") {
+                return "winter"
+            }
+            else if (month == "Mar" || month == "Apr" || month == "May") {
+                return "spring"
+            }
+            else if (month == "Jun" || month == "Jul" || month == "Aug") {
+                return "summer"
+            }
+            else if (month == "Sep" || month == "Oct" || month == "Nov") {
+                return "fall"
+            }
+        }
+
+
+        function getOutOfSeason(groceryList) {
+
+            if (currSeason == "fall") {
+                for (var i = 0; i < groceryList.length; i++) {
+                    var inSeason = false;
+                    for (var j = 0; j < fall.length; j++) {
+                        if (groceryList[i].name == fall[j]) {
+                            inSeason = true; 
+                        }
+                    }
+                    if (!inSeason) {
+                        outOfSeasonList.push(groceryList[i]);
+                    }
+                }
+            }
+            else if (currSeason == "winter") {
+                for (var i = 0; i < groceryList.length; i++) {
+                    var inSeason = false;
+                    for (var j = 0; j < winter.length; j++) {
+                        if (groceryList[i].name == winter[j]) {
+                            inSeason = true; 
+                        }
+                    }
+                    if (!(inSeason)) {
+                        outOfSeasonList.push(groceryList[i]);
+                    }
+                }
+            }
+            else if (currSeason == "summer") {
+                for (var i = 0; i < groceryList.length; i++) {
+                    var inSeason = false;
+                    for (var j = 0; j < summer.length; j++) {
+                        if (groceryList[i].name == summer[j]) {
+                            inSeason = true; 
+                        }
+                    }
+                    if (!inSeason) {
+                        outOfSeasonList.push(groceryList[i]);
+                    }
+                }
+            }
+            else if (currSeason == "spring") {
+                for (var i = 0; i < groceryList.length; i++) {
+                    var inSeason = false;
+                    for (var j = 0; j < spring.length; j++) {
+                        if (groceryList[i].name == spring[j]) {
+                            inSeason = true; 
+                        }
+                    }
+                    if (!inSeason) {
+                        outOfSeasonList.push(groceryList[i]);
+                    }
+                }
+            }
+
+            return outOfSeasonList;            
+            
+        }
+
 
 
 
