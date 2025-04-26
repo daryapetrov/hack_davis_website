@@ -1,2 +1,2 @@
-# hack_davis
-HackDavis2020 project
+# HackDavis2020 project
+https://a-rufer.github.io/hack_davis/index.html
